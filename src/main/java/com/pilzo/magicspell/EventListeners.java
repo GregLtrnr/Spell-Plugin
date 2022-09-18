@@ -1,5 +1,4 @@
 package com.pilzo.magicspell;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -12,7 +11,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import com.pilzo.magicspell.spells.Jail;
 
 public class EventListeners implements Listener {
-    public static Block[] blocks = {};
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
         if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
@@ -22,13 +20,9 @@ public class EventListeners implements Listener {
               Block block = player.getTargetBlock(null, 10);
               Jail jail = new Jail(block,player);
             }else{
-              //send a red message to the player
               player.sendMessage(ChatColor.RED+"You don't have permission to cast this spell.");
-
-
             }
           }
-          // if matirial is wooden stick, print the target block informations
           if(event.getItem().getType() == Material.STICK){
             Player player = event.getPlayer();
             Block block = player.getTargetBlock(null, 10);
