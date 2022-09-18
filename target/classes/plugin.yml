@@ -2,3 +2,7 @@ name: magicspell
 main: com.pilzo.magicspell.Plugin
 version: 0.0.1
 api-version: 1.15
+permissions:
+  magicspell.cast.jail:
+    description: Cast a jail
+    default: op
