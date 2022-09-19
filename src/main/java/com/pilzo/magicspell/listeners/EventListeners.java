@@ -1,4 +1,4 @@
-package com.pilzo.magicspell;
+package com.pilzo.magicspell.listeners;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -8,17 +8,26 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import com.pilzo.magicspell.MagicSpell;
 import com.pilzo.magicspell.spells.Jail;
 
 public class EventListeners implements Listener {
+    private MagicSpell plugin;
+    public void EventListeners(MagicSpell plugin){
+        this.plugin = plugin;
+    }
+
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
         if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
           if(event.getItem().getType() == Material.BLAZE_ROD){
             Player player = event.getPlayer();
             if(player.hasPermission("magicspell.cast.jail")){
-              Block block = player.getTargetBlock(null, 10);
-              Jail jail = new Jail(block,player);
+              if(!this.plugin.cooldownHander.hasCooldown(player)){
+                Block block = player.getTargetBlock(null, 10);
+                Jail jail = new Jail(block,player);
+                this.plugin.cooldownHander.addCooldown(player);
+              }
             }else{
               player.sendMessage(ChatColor.RED+"You don't have permission to cast this spell.");
             }
