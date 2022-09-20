@@ -20,38 +20,31 @@ public class EventListeners implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
+      //Si la personne fait un clic droit sur un block
         if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
+          //Si le clic droit est fait avec une blaze rod en main
           if(event.getItem().getType() == Material.BLAZE_ROD){
             Player player = event.getPlayer();
+            //Si la personne a la permission pour le spell jail
             if(player.hasPermission("magicspell.cast.jail")){
-              if(!this.plugin.cooldownHander.hasCooldown(player)){
-                Block block = player.getTargetBlock(null, 10);
-                Jail jail = new Jail(block,player);
-                this.plugin.cooldownHander.addCooldown(player);
+              //Si la personne a un cooldown
+              if(this.plugin.cooldownHander.hasCooldown(player)){
+                //Si le cooldown est fini
+                if(this.plugin.cooldownHander.checkCooldown(player)){
+                  //On enlève le cooldown
+                  this.plugin.cooldownHander.removeCooldown(player);
+                  //On cast le spell
+                  Jail jail = new Jail(event.getClickedBlock(),player);
+                  //On reset le cooldown
+                  this.plugin.cooldownHander.addCooldown(player);
+              }else{
+                player.sendMessage(ChatColor.RED + "You need to wait " + this.plugin.cooldownHander.getCooldown(player) + " seconds to cast spell again!");
               }
-            }else{
+            }
+          }else{
               player.sendMessage(ChatColor.RED+"You don't have permission to cast this spell.");
             }
           }
-          if(event.getItem().getType() == Material.STICK){
-            Player player = event.getPlayer();
-            Block block = player.getTargetBlock(null, 10);
-            player.sendMessage("Target block type: " + block.getType());
-            player.sendMessage("Target block location: " + block.getLocation());
-            player.sendMessage("Target block world: " + block.getWorld());
-            player.sendMessage("Target block x: " + block.getX());
-            player.sendMessage("Target block y: " + block.getY());
-            player.sendMessage("Target block z: " + block.getZ());
-          }
         }
       }
-  public Runnable breakGlass(Block[] blocks, Player player){
-    player.sendMessage("Spell ended");
-    for(Block b : blocks){
-      if(b.getType() == Material.GLASS){
-        b.setType(Material.AIR);
-      }
-    }
-    return null;
-  }
 }

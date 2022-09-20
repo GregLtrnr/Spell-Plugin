@@ -32,7 +32,6 @@ public class CooldownHander {
             long cooldown = cooldowns.get(player.getUniqueId());
             long time = System.currentTimeMillis();
             if(time - cooldown >= plugin.getConfig().getInt("spells.cooldown")){
-                removeCooldown(player);
                 return true;
             }
         }
