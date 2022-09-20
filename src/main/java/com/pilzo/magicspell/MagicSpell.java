@@ -12,12 +12,14 @@ import com.pilzo.magicspell.listeners.EventListeners;
 public class MagicSpell extends JavaPlugin
 {
   private static final Logger LOGGER=Logger.getLogger("magicspell");
-  private CooldownHander cooldownHander;
+  public CooldownHander cooldownHander;
+
   @Override
   public void onEnable(){
+    saveDefaultConfig();
     LOGGER.info("magicspell enabled");
-    cooldownHander = new CooldownHander();
-    getServer().getPluginManager().registerEvents(new EventListeners(),this);
+    cooldownHander = new CooldownHander(this);
+    getServer().getPluginManager().registerEvents(new EventListeners(this),this);
   }
 
   public void onDisable(){

@@ -13,7 +13,8 @@ import com.pilzo.magicspell.spells.Jail;
 
 public class EventListeners implements Listener {
     private MagicSpell plugin;
-    public void EventListeners(MagicSpell plugin){
+
+    public EventListeners(MagicSpell plugin){
         this.plugin = plugin;
     }
 
