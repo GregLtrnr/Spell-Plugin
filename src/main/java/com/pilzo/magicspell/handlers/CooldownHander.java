@@ -21,9 +21,10 @@ public class CooldownHander {
             cooldowns.remove(player.getUniqueId());
         }
     }
-    public int getCooldown(Player player){
+    public long getCooldown(Player player){
         if(cooldowns.containsKey(player.getUniqueId())){
-            return (int) ((cooldowns.get(player.getUniqueId()) / 1000) + plugin.getConfig().getInt("cooldown") - (System.currentTimeMillis() / 1000));
+            return (cooldowns.get(player.getUniqueId()) - (System.currentTimeMillis()) + (plugin.getConfig().getInt("spells.cooldown"))*1000)/1000;
+            
         }
         return 0;
     }
@@ -31,11 +32,14 @@ public class CooldownHander {
         if(cooldowns.containsKey(player.getUniqueId())){
             long cooldown = cooldowns.get(player.getUniqueId());
             long time = System.currentTimeMillis();
-            if(time - cooldown >= plugin.getConfig().getInt("spells.cooldown")){
+            if(time - cooldown >= plugin.getConfig().getInt("spells.cooldown") * 1000){
                 return true;
+            }else{
+                return false;
             }
+        }else{
+            return false;
         }
-        return false;
     }
     public boolean hasCooldown(Player player){
         return cooldowns.containsKey(player.getUniqueId());

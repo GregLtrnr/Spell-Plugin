@@ -1,5 +1,5 @@
 name: magicspell
-main: com.pilzo.magicspell.Plugin
+main: com.pilzo.magicspell.MagicSpell
 version: 0.0.1
 api-version: 1.15
 permissions:
