@@ -20,6 +20,7 @@ public class EventListeners implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
+      System.out.println(event);
         if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
           //clic droit blaze rod
           if(event.getItem().getType() == Material.BLAZE_ROD){

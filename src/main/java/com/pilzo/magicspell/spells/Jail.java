@@ -10,14 +10,14 @@ public class Jail {
         blocks = new Block[]{block.getRelative(0, 3, 0),block.getRelative(1, 1, 0),block.getRelative(1, 2, 0),block.getRelative(-1, 1, 0),block.getRelative(-1, 2, 0),block.getRelative(0, 1, 1),block.getRelative(0, 2, 1),block.getRelative(0, 1, -1),block.getRelative(0, 2, -1)};
         for(Block b : blocks){
             if(b.getType() == Material.AIR){
-                b.setType(Material.GLASS);
+                b.setType(Material.WEB);
             }
         }
         player.sendMessage("Spell casted");
         Bukkit.getScheduler().runTaskLater((Bukkit.getPluginManager().getPlugin("magicspell")),new Runnable() {
             public void run(){
               for(Block b : blocks){
-                if(b.getType() == Material.GLASS){
+                if(b.getType() == Material.WEB){
                   b.setType(Material.AIR);
                 }
               }
