@@ -1,4 +1,5 @@
-/home/gregltrnr/Minecraft servers/Spell-Plugin/src/main/java/com/pilzo/magicspell/handlers/CooldownHander.java
-/home/gregltrnr/Minecraft servers/Spell-Plugin/src/main/java/com/pilzo/magicspell/listeners/EventListeners.java
-/home/gregltrnr/Minecraft servers/Spell-Plugin/src/main/java/com/pilzo/magicspell/MagicSpell.java
-/home/gregltrnr/Minecraft servers/Spell-Plugin/src/main/java/com/pilzo/magicspell/spells/Jail.java
+c:\Users\Greg\Desktop\JavaProjects\magicspell\src\main\java\com\pilzo\magicspell\listeners\EventListeners.java
+c:\Users\Greg\Desktop\JavaProjects\magicspell\src\main\java\com\pilzo\magicspell\handlers\userSpells.java
+c:\Users\Greg\Desktop\JavaProjects\magicspell\src\main\java\com\pilzo\magicspell\MagicSpell.java
+c:\Users\Greg\Desktop\JavaProjects\magicspell\src\main\java\com\pilzo\magicspell\spells\Jail.java
+c:\Users\Greg\Desktop\JavaProjects\magicspell\src\main\java\com\pilzo\magicspell\handlers\CooldownHander.java

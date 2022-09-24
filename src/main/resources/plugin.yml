@@ -6,3 +6,9 @@ permissions:
   magicspell.cast.jail:
     description: Cast a jail
     default: op
+  magicspell.cast.longjump:
+    description: Get a long jump
+    default: op
+  magicspell.cast.heal:
+    description: Heal yourself
+    default: op

@@ -38,7 +38,7 @@ public class CooldownHander {
                 return false;
             }
         }else{
-            return false;
+            return true;
         }
     }
     public boolean hasCooldown(Player player){
