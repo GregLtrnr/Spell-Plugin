@@ -20,16 +20,14 @@ import com.pilzo.magicspell.spells.Jail;
 
 public class EventListeners implements Listener {
     private MagicSpell plugin;
-    private Boolean isSneaking;
     private final Map <UUID, userSpells> users = new HashMap<>();
 
     public EventListeners(MagicSpell plugin){
         this.plugin = plugin;
-        this.isSneaking = false;
     }
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
-        if(event.getAction() == Action.RIGHT_CLICK_BLOCK && this.isSneaking == false){
+        if(event.getAction() == Action.RIGHT_CLICK_BLOCK ||event.getAction() == Action.RIGHT_CLICK_AIR && event.getPlayer().isSneaking() == false){
           //clic droit blaze rod
           if(event.getItem().getType() == Material.BLAZE_ROD){
             Player player = event.getPlayer();
@@ -43,12 +41,20 @@ public class EventListeners implements Listener {
                   player.sendMessage(ChatColor.RED + "Vous ne possedez pas de sorts");
                   break;
                 case "jail":
+                  if(event.getClickedBlock() == null){
+                    player.sendMessage(ChatColor.RED + "Vous devez cibler un bloc");
+                  }else{
                   Jail jail = new Jail(event.getClickedBlock(),player);
                   this.plugin.cooldownHander.addCooldown(player);
+                  }
                   break;
                 case "heal":
                   player.setHealth(20);
                   player.sendMessage(ChatColor.GREEN + "Vous avez été soigné");
+                  this.plugin.cooldownHander.addCooldown(player);
+                  break;
+                case "longjump":
+                  player.setVelocity(player.getLocation().getDirection().multiply(6).setY(1));
                   this.plugin.cooldownHander.addCooldown(player);
                   break;
                 default:
@@ -60,7 +66,7 @@ public class EventListeners implements Listener {
             }
           }
         }
-        if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK && this.isSneaking == true){
+        if((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && event.getPlayer().isSneaking() == true){
             if(event.getItem() != null && event.getItem().getType() == Material.BLAZE_ROD){
               Player player = event.getPlayer();
               if(users.containsKey(player.getUniqueId())){
@@ -76,15 +82,6 @@ public class EventListeners implements Listener {
               }
             }
           } 
-        }
-      }
-
-      @EventHandler
-      public void onPlayerSneak(PlayerToggleSneakEvent event){
-        if(event.isSneaking()){
-          this.isSneaking = true;
-        }else{
-          this.isSneaking = false;
         }
       }
       @EventHandler
