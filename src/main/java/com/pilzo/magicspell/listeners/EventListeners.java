@@ -46,6 +46,7 @@ public class EventListeners implements Listener {
                   }else{
                   Jail jail = new Jail(event.getClickedBlock(),player);
                   this.plugin.cooldownHander.addCooldown(player);
+                  player.sendMessage(ChatColor.DARK_PURPLE+"Woosh !");
                   }
                   break;
                 case "heal":
@@ -54,8 +55,9 @@ public class EventListeners implements Listener {
                   this.plugin.cooldownHander.addCooldown(player);
                   break;
                 case "longjump":
-                  player.setVelocity(player.getLocation().getDirection().multiply(6).setY(1));
+                  player.setVelocity(player.getLocation().getDirection().multiply(this.plugin.getConfig().getDouble("longjump.velocity")).setY(1));
                   this.plugin.cooldownHander.addCooldown(player);
+                  player.sendMessage(ChatColor.DARK_PURPLE+"Woosh !");
                   break;
                 default:
                   player.sendMessage(ChatColor.RED + "You don't have any spell selected");

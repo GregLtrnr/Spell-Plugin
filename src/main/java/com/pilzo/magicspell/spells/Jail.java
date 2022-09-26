@@ -13,7 +13,6 @@ public class Jail {
                 b.setType(Material.WEB);
             }
         }
-        player.sendMessage("Spell casted");
         Bukkit.getScheduler().runTaskLater((Bukkit.getPluginManager().getPlugin("magicspell")),new Runnable() {
             public void run(){
               for(Block b : blocks){

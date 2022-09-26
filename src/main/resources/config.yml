@@ -1,2 +1,7 @@
 spells:
+#set cooldown for all spells
   cooldown: 240
+#set velocity of the long jump
+#default is 6
+longjump:
+  velocity: 6
